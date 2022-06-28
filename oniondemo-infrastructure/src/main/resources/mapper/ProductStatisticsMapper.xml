@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dustess.oniondemo.mybatis.mapper.ProductStatisticsMapper">
+  <resultMap id="BaseResultMap" type="com.dustess.oniondemo.mybatis.po.ProductStatisticsPO">
+    <!--@mbg.generated-->
+    <!--@Table product_statistics-->
+    <id column="id" property="id" />
+    <result column="account" property="account" />
+    <result column="product_id" property="productId" />
+    <result column="paid_order_count" property="paidOrderCount" />
+    <result column="unpaid_order_count" property="unpaidOrderCount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, account, product_id, paid_order_count, unpaid_order_count, created_at, updated_at, 
+    version
+  </sql>
+  <select id="selectById" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from product_statistics
+    where id = #{id} and account = #{account}
+  </select>
+  <insert id="replace" parameterType="com.dustess.oniondemo.mybatis.po.ProductStatisticsPO">
+    <!--@mbg.generated-->
+    replace into product_statistics (id, account, product_id, paid_order_count, unpaid_order_count)
+    values (#{id}, #{account}, #{productId}, #{paidOrderCount}, #{unpaidOrderCount})
+  </insert>
+</mapper>

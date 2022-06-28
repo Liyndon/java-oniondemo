@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dustess.oniondemo.mybatis.mapper.OrderItemMapper">
+  <resultMap id="BaseResultMap" type="com.dustess.oniondemo.mybatis.po.OrderItemPO">
+    <!--@mbg.generated-->
+    <!--@Table order_item-->
+    <id column="id" property="id" />
+    <result column="account" property="account" />
+    <result column="order_id" property="orderId" />
+    <result column="product_id" property="productId" />
+    <result column="unit_price" property="unitPrice" />
+    <result column="quantity" property="quantity" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, account, order_id, product_id, unit_price, quantity
+  </sql>
+  <delete id="deleteByOrderId">
+    <!--@mbg.generated-->
+    delete from order_item
+    where order_id = #{orderId} and account = #{account}
+  </delete>
+  <insert id="insert" parameterType="com.dustess.oniondemo.mybatis.po.OrderItemPO">
+    <!--@mbg.generated-->
+    insert into order_item (id, account, order_id, product_id, unit_price, quantity)
+    values (#{id}, #{account}, #{orderId}, #{productId}, #{unitPrice}, #{quantity})
+  </insert>
+  <update id="update" parameterType="com.dustess.oniondemo.mybatis.po.OrderItemPO">
+    <!--@mbg.generated-->
+    update order_item
+    set order_id = #{orderId},
+      product_id = #{productId},
+      unit_price = #{unitPrice},
+      quantity = #{quantity}
+    where id = #{id} and account = #{account}
+  </update>
+  <select id="selectByOrderId" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from order_item
+    where order_id = #{orderId} and account = #{account}
+  </select>
+  <select id="selectByProductId" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from order_item
+    where order_id = #{productId} and account = #{account}
+  </select>
+</mapper>

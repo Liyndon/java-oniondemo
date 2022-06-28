@@ -1,0 +1,94 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /java-oniondemo-srv
+
+feign:
+  httpclient:
+    enabled: true
+  url:
+    qw-dept-user: https://mk-internal-test3.dustess.com
+
+knife4j:
+  cors: true
+  enable: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    export:
+      datadog:
+        enabled: false
+    tags:
+      application: ${spring.application.name}
+mybatis:
+  typeAliasesPackage: com.dustess.oniondemo.mybatis.po
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+spring:
+  application:
+    name: java-oniondemo-srv
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://tdsqlshard-gjosf6ng.sql.tencentcdb.com:64/oniondemo?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&serverTimezone=GMT%2B8&allowMultiQueries=true
+    username: dustess
+    password: Dustess123~
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat
+  kafka:
+    bootstrap-servers: 192.168.2.123:9092
+    consumer:
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      fetch-max-wait: 500
+      fetch-min-size: 1
+      group-id: java-oniondemo-srv-dev
+    listener:
+      ack-mode: manual_immediate
+      concurrency: 2
+    producer:
+      acks: 1
+      client-id: java-oniondemo-srv
+    topic:
+      points:
+        obtain: oniondemo_domain_event
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    include: java-oniondemo-srv,feign
+  redis:
+    database: 0
+    host: 192.168.0.128
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: 1
+        min-idle: 0
+    password: dustesssetsud
+    port: 6379
+    timeout: 10000
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+
+logging:
+  level:
+    com.dustess.oniondemo.mapper: debug

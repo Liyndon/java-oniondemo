@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dustess.oniondemo.mybatis.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.dustess.oniondemo.mybatis.po.ProductPO">
+    <!--@mbg.generated-->
+    <!--@Table product-->
+    <id column="id" property="id" />
+    <result column="account" property="account" />
+    <result column="name" property="name" />
+    <result column="description" property="description" />
+    <result column="price" property="price" />
+    <result column="status" property="status" />
+    <result column="created_at" property="createdAt" />
+    <result column="created_by" property="createdBy" />
+    <result column="updated_at" property="updatedAt" />
+    <result column="updated_by" property="updatedBy" />
+    <result column="version" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, account, `name`, description, price, `status`, created_at, created_by, updated_at, 
+    updated_by, version
+  </sql>
+  <insert id="insert" parameterType="com.dustess.oniondemo.mybatis.po.ProductPO">
+    <!--@mbg.generated-->
+    insert into product (id, account, `name`, description, price, `status`, created_at, 
+      created_by, updated_at, updated_by, version)
+    values (#{id}, #{account}, #{name}, #{description}, #{price}, #{status}, #{createdAt}, 
+      #{createdBy}, #{updatedAt}, #{updatedBy}, #{version})
+  </insert>
+  <update id="updateByIdAndVersion" parameterType="com.dustess.oniondemo.mybatis.po.ProductPO">
+    <!--@mbg.generated-->
+    update product
+    set `name` = #{name},
+    description = #{description},
+    price = #{price},
+    `status` = #{status},
+    updated_at = #{updatedAt},
+    updated_by = #{updatedBy},
+    version = #{version} + 1
+    where id = #{id} and version = #{version} and account = #{account}
+  </update>
+  <select id="selectById" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id} and account = #{account}
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from product
+    where name = #{name} and account = #{account}
+  </select>
+  <select id="selectByIds" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from product where account = #{account}
+    <if test="ids != null and ids.size() != 0">
+      and id in
+      <foreach collection="ids" item="item" index="index" open="(" close=")" separator=",">
+        #{item}
+      </foreach>
+    </if>
+  </select>
+</mapper>

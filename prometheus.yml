@@ -1,0 +1,24 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: !PROJECT_NAME-monitor
+  namespace: monitoring
+  labels:
+    k8s-app: jvm-monitor
+spec:
+  jobLabel: k8s-app
+  endpoints:
+    #定义deployment的port的name
+    - port: http
+      #metrics路径
+      path: '/!PROJECT_NAME/actuator/prometheus'
+      #间隔
+      interval: 60s
+  selector:
+    #service选择标签
+    matchLabels:
+      app: !PROJECT_NAME
+      #namespaces选择
+  namespaceSelector:
+    matchNames:
+      - !NAMESPACE

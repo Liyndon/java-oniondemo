@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty scope="context" name="path" source="spring.application.name" defaultValue="undefined"/>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+        <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] -%5p ${PID:-} [ %X{TRACE} ] [%15.15t] %-40.40logger{39} : %m%n</pattern>
+                <charset>utf8</charset>
+            </encoder>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="Console"/>
+        </root>
+</configuration>

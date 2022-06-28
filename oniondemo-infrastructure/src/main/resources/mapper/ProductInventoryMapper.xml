@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dustess.oniondemo.mybatis.mapper.ProductInventoryMapper">
+  <resultMap id="BaseResultMap" type="com.dustess.oniondemo.mybatis.po.ProductInventoryPO">
+    <!--@mbg.generated-->
+    <!--@Table product_inventory-->
+    <id column="id" property="id" />
+    <result column="account" property="account" />
+    <result column="product_id" property="productId" />
+    <result column="quantity" property="quantity" />
+    <result column="created_at" property="createdAt" />
+    <result column="created_by" property="createdBy" />
+    <result column="updated_at" property="updatedAt" />
+    <result column="updated_by" property="updatedBy" />
+    <result column="version" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, account, product_id, quantity, created_at, created_by, updated_at, updated_by, version
+  </sql>
+  <insert id="insert" parameterType="com.dustess.oniondemo.mybatis.po.ProductInventoryPO">
+    <!--@mbg.generated-->
+    insert into product_inventory (id, account, product_id, quantity, created_at, created_by, updated_at, updated_by, version)
+    values (#{id}, #{account}, #{productId}, #{quantity}, #{createdAt}, #{createdBy}, #{updatedAt}, #{updatedBy}, #{version})
+  </insert>
+  <update id="updateByIdAndVersion" parameterType="com.dustess.oniondemo.mybatis.po.ProductInventoryPO">
+    <!--@mbg.generated-->
+    update product_inventory
+    set product_id = #{productId},
+      quantity = #{quantity},
+      updated_at = #{updatedAt},
+      updated_by = #{updatedBy},
+      version = #{version} + 1
+    where id = #{id} and version = #{version} and account = #{account}
+  </update>
+  <select id="selectById" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from product_inventory
+    where id = #{id} and account = #{account}
+  </select>
+</mapper>
