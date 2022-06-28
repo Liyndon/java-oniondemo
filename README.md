@@ -1,6 +1,6 @@
 # 洋葱架构 Demo
 
-![onion](https://git.dustess.com/java/java-oniondemo-srv/-/raw/master/onion_architecture.png)
+![onion](./onion_architecture.png)
 
 ## 洋葱架构介绍
 2008 年 Jeffrey Palermo 提出了洋葱架构(属于应用架构)。通过分离关注点（即：分离业务复杂性与技术复杂性，分离业务不变性与可变性）在其内部构建出稳定、灵活、可演进的模型。具有以下特点：
@@ -20,7 +20,7 @@
 - 弱化DomainService，鉴于过往的实践中很多同学区分不了领域服务（DomainService：业务不变性）和应用服务（AppService：产品用例，具有可变性），所以样例中没有DomainService的代码
 
 ## 分层关系
-![onion_layout](https://git.dustess.com/java/java-oniondemo-srv/-/raw/master/onion_layout.png)
+![onion_layout](./onion_layout.png)
 
 ## 工程结构
 ```aidl
